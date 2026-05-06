@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>🧪 Bev Cal | Brix · Distillation · Acid · Pairing</title>
@@ -27,7 +27,7 @@
         body {
             background: #f4efe7;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 20px 16px 60px;
+            padding: 20px 24px 60px;
             color: #2c2418;
         }
 
@@ -35,13 +35,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
 
         .app-wrapper {
-            max-width: 880px;
+            max-width: 1280px;
             margin: 0 auto;
+            width: 100%;
         }
 
         .tool-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .tool-header h1 {
             font-size: 2.2rem;
@@ -55,7 +56,7 @@
         }
         .tool-header p {
             color: #6b4e2e;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             margin-top: 6px;
             font-weight: 400;
         }
@@ -63,23 +64,25 @@
         .tabs-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             scrollbar-width: thin;
         }
         .tabs {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             background: #e7dfd3;
             padding: 6px;
             border-radius: 60px;
             min-width: min-content;
+            width: fit-content;
+            margin: 0 auto;
         }
         .tab-btn {
             white-space: nowrap;
             background: transparent;
             border: none;
-            padding: 10px 18px;
-            font-size: 0.85rem;
+            padding: 10px 24px;
+            font-size: 0.9rem;
             font-weight: 600;
             border-radius: 40px;
             color: #5a3e28;
@@ -108,38 +111,39 @@
         .card {
             background: #fffef7;
             border-radius: 40px;
-            padding: 22px 20px;
-            margin-bottom: 20px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #ede3d6;
+            width: 100%;
         }
         .card-title {
             font-weight: 700;
-            font-size: 1.25rem;
-            margin-bottom: 18px;
+            font-size: 1.35rem;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: #4a3420;
             border-left: 5px solid #e7b874;
-            padding-left: 14px;
+            padding-left: 18px;
             font-family: 'Inter', sans-serif;
         }
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         label {
             font-weight: 500;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #7a5a3e;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         input, select {
             width: 100%;
-            padding: 12px 14px;
+            padding: 12px 16px;
             font-size: 0.95rem;
             background: white;
             border: 1.5px solid #e4d5c4;
@@ -154,82 +158,85 @@
             border-color: #e2a25c;
             box-shadow: 0 0 0 3px rgba(226,162,92,0.2);
         }
-        .row-2col {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
+        .grid-2col, .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
         }
-        .row-2col > div {
-            flex: 1;
-            min-width: 120px;
+        .grid-2col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .grid-3col {
+            grid-template-columns: repeat(3, 1fr);
         }
         button {
             background: #d99142;
             border: none;
             width: 100%;
-            padding: 12px;
-            font-size: 0.95rem;
+            padding: 14px;
+            font-size: 1rem;
             font-weight: 600;
             color: white;
             border-radius: 60px;
-            margin-top: 12px;
+            margin-top: 16px;
             cursor: pointer;
             transition: 0.15s;
             font-family: 'Inter', sans-serif;
         }
         button:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
             background: #bb7536;
         }
         .result-area {
             background: #2c2418;
-            border-radius: 28px;
-            padding: 18px;
+            border-radius: 32px;
+            padding: 20px 24px;
             color: #ffefdf;
-            margin-top: 14px;
+            margin-top: 20px;
         }
         .result-item {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(255,225,195,0.2);
             flex-wrap: wrap;
             gap: 8px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
         .result-value {
             font-weight: 700;
             font-family: 'Inter', monospace;
             background: #3f3324;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 60px;
             font-size: 0.9rem;
             text-align: right;
         }
         .badge {
             background: #f0e2d0;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 50px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #7a562e;
             display: inline-block;
         }
         .warning-note {
             background: #5e3a1f33;
-            padding: 8px;
+            padding: 10px;
             border-radius: 24px;
-            font-size: 0.7rem;
-            margin-top: 12px;
+            font-size: 0.75rem;
+            margin-top: 14px;
             text-align: center;
         }
         .footer {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             text-align: center;
             color: #af967c;
-            margin-top: 24px;
+            margin-top: 32px;
             border-top: 1px solid #e9dfd1;
-            padding-top: 20px;
+            padding-top: 24px;
         }
         .footer a {
             color: #b35f2a;
@@ -239,10 +246,63 @@
         .footer a:hover {
             text-decoration: underline;
         }
-        hr { margin: 12px 0; border-color: #ede3d6; }
-        @media (max-width: 550px) {
-            .card { padding: 18px 16px; }
-            .result-item { font-size: 0.8rem; }
+        hr { margin: 16px 0; border-color: #ede3d6; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+            .card {
+                padding: 20px 18px;
+            }
+            .card-title {
+                font-size: 1.2rem;
+                margin-bottom: 18px;
+            }
+            .grid-2col, .grid-3col {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .result-item {
+                font-size: 0.85rem;
+            }
+            .result-value {
+                font-size: 0.8rem;
+                padding: 3px 10px;
+            }
+            .tab-btn {
+                padding: 8px 18px;
+                font-size: 0.8rem;
+            }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid-3col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1025px) {
+            .grid-3col {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        /* Distillation sub-tabs */
+        .distillation-subtabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .distillation-subtabs button {
+            width: auto;
+            margin-top: 0;
+            padding: 8px 20px;
+            background: #e7dfd3;
+            color: #5a3e28;
+        }
+        .distillation-subtabs button.active-sub {
+            background: #d99142;
+            color: white;
         }
     </style>
 </head>
@@ -262,12 +322,16 @@
         </div>
     </div>
 
-    <!-- BRIX PANE (First) -->
+    <!-- BRIX PANE -->
     <div id="brixPane" class="pane active-pane">
         <div class="card">
             <div class="card-title">📊 Brix Cal · sugar & gum adjustment</div>
-            <div class="row-2col"><div><label>Juice volume (ml)</label><input type="number" id="brixVolume" value="500" step="50"></div><div><label>Starting Brix (°Bx)</label><input type="number" id="startBrix" value="12" step="0.5"></div></div>
-            <div class="row-2col"><div><label>Target Brix (°Bx)</label><input type="number" id="targetBrix" value="22" step="0.5"></div><div><label>Final weight (g) [optional]</label><input type="number" id="finalWeight" placeholder="for gum & acids"></div></div>
+            <div class="grid-2col">
+                <div><label>Juice volume (ml)</label><input type="number" id="brixVolume" value="500" step="50"></div>
+                <div><label>Starting Brix (°Bx)</label><input type="number" id="startBrix" value="12" step="0.5"></div>
+                <div><label>Target Brix (°Bx)</label><input type="number" id="targetBrix" value="22" step="0.5"></div>
+                <div><label>Final weight (g) [optional]</label><input type="number" id="finalWeight" placeholder="for gum & acids"></div>
+            </div>
             <div class="result-area" id="brixResults">
                 <div class="result-item"><span>🍬 Sugar already in juice</span><span id="sugarInJuice" class="result-value">— g</span></div>
                 <div class="result-item"><span>💧 Water content in juice</span><span id="waterContent" class="result-value">— g</span></div>
@@ -282,21 +346,39 @@
         </div>
     </div>
 
-    <!-- DISTILLATION PANE (Second) -->
+    <!-- DISTILLATION PANE -->
     <div id="distillationPane" class="pane">
         <div class="card">
             <div class="card-title">⚗️ Spirit Calculators · Dilution & Sweetening & Proofing</div>
-            <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;"><button id="showDilution" style="width:auto; padding:8px 16px;">💧 Dilution</button><button id="showSweetening" style="width:auto; padding:8px 16px;">🍯 Sweetening</button><button id="showProofing" style="width:auto; padding:8px 16px;">📊 Proofing</button></div>
+            <div class="distillation-subtabs" id="distillationSubtabs">
+                <button data-distill="dilution" class="active-sub">💧 Dilution</button>
+                <button data-distill="sweetening">🍯 Sweetening</button>
+                <button data-distill="proofing">📊 Proofing</button>
+            </div>
             
             <div id="dilutionSection">
-                <div class="row-2col"><div><label>Distillate strength (%)</label><input type="number" id="distillateStrength" value="70"></div><div><label>Volume (ml)</label><input type="number" id="distillateVol" value="1000"></div></div>
+                <div class="grid-2col">
+                    <div><label>Distillate strength (%)</label><input type="number" id="distillateStrength" value="70"></div>
+                    <div><label>Volume (ml)</label><input type="number" id="distillateVol" value="1000"></div>
+                </div>
                 <div class="input-group"><label>Desired strength (%)</label><input type="number" id="desiredStrength" value="40"></div>
-                <div class="result-area"><div class="result-item"><span>💧 Water to Add</span><span id="waterToAdd" class="result-value">0 ml</span></div><div class="result-item"><span>📦 Final Volume</span><span id="finalDilutionVol" class="result-value">0 ml</span></div><div class="result-item"><span>📉 ABV Reduction</span><span id="abvReduction" class="result-value">0%</span></div><div class="result-item"><span>⚖️ Dilution Ratio</span><span id="dilutionRatio" class="result-value">0:0</span></div></div>
+                <div class="result-area">
+                    <div class="result-item"><span>💧 Water to Add</span><span id="waterToAdd" class="result-value">0 ml</span></div>
+                    <div class="result-item"><span>📦 Final Volume</span><span id="finalDilutionVol" class="result-value">0 ml</span></div>
+                    <div class="result-item"><span>📉 ABV Reduction</span><span id="abvReduction" class="result-value">0%</span></div>
+                    <div class="result-item"><span>⚖️ Dilution Ratio</span><span id="dilutionRatio" class="result-value">0:0</span></div>
+                </div>
             </div>
             
             <div id="sweeteningSection" style="display:none;">
-                <div class="row-2col"><div><label>Spirit volume (ml)</label><input type="number" id="sweetVol" value="1000"></div><div><label>Alcohol percentage (%)</label><input type="number" id="sweetABV" value="40"></div></div>
-                <div class="row-2col"><div><label>Sugar percentage of final volume</label><input type="number" id="targetSugarPercent" value="8" step="1"></div><div><label>Syrup ratio (sugar:water)</label><select id="syrupRatio"><option value="2">2:1 Rich (67%)</option><option value="1">1:1 Simple (50%)</option><option value="3">3:1 Very rich (75%)</option></select></div></div>
+                <div class="grid-2col">
+                    <div><label>Spirit volume (ml)</label><input type="number" id="sweetVol" value="1000"></div>
+                    <div><label>Alcohol percentage (%)</label><input type="number" id="sweetABV" value="40"></div>
+                </div>
+                <div class="grid-2col">
+                    <div><label>Sugar percentage of final volume</label><input type="number" id="targetSugarPercent" value="8" step="1"></div>
+                    <div><label>Syrup ratio (sugar:water)</label><select id="syrupRatio"><option value="2">2:1 Rich (67%)</option><option value="1">1:1 Simple (50%)</option><option value="3">3:1 Very rich (75%)</option></select></div>
+                </div>
                 <div class="result-area">
                     <div class="result-item"><span>🍬 Sugar Needed</span><span id="sugarNeeded" class="result-value">0 g</span></div>
                     <div class="result-item"><span>💧 Water for Syrup</span><span id="waterForSyrup" class="result-value">0 ml</span></div>
@@ -308,24 +390,33 @@
             </div>
             
             <div id="proofingSection" style="display:none;">
-                <div class="row-2col"><div><label>Base liquid volume (ml)</label><input type="number" id="baseVol" value="800"></div><div><label>Base ABV (%)</label><input type="number" id="baseABV" value="30"></div></div>
-                <div class="row-2col"><div><label>Desired target ABV (%)</label><input type="number" id="targetProofABV" value="45"></div><div><label>High-proof spirit ABV (%)</label><input type="number" id="highProofABV" value="75"></div></div>
-                <div class="result-area"><div class="result-item"><span>➕ Add spirit</span><span id="addSpirit" class="result-value">0 ml</span></div><div class="result-item"><span>🧪 Final blend volume</span><span id="finalBlendVol" class="result-value">0 ml</span></div></div>
+                <div class="grid-2col">
+                    <div><label>Base liquid volume (ml)</label><input type="number" id="baseVol" value="800"></div>
+                    <div><label>Base ABV (%)</label><input type="number" id="baseABV" value="30"></div>
+                </div>
+                <div class="grid-2col">
+                    <div><label>Desired target ABV (%)</label><input type="number" id="targetProofABV" value="45"></div>
+                    <div><label>High-proof spirit ABV (%)</label><input type="number" id="highProofABV" value="75"></div>
+                </div>
+                <div class="result-area">
+                    <div class="result-item"><span>➕ Add spirit</span><span id="addSpirit" class="result-value">0 ml</span></div>
+                    <div class="result-item"><span>🧪 Final blend volume</span><span id="finalBlendVol" class="result-value">0 ml</span></div>
+                </div>
             </div>
             <button id="calcDistillationBtn">Update calculation</button>
         </div>
     </div>
 
-    <!-- ACID PANE (Third) -->
+    <!-- ACID PANE -->
     <div id="acidPane" class="pane">
         <div class="card">
             <div class="card-title">⚖️ Acid Adjustment · match any fruit's acidity</div>
             <div class="input-group"><label>🥤 Juice mass (grams)</label><input type="number" id="acidMass" value="100" step="10"></div>
-            <div class="row-2col">
+            <div class="grid-2col">
                 <div><label>🍊 Starting Juice Type</label><select id="sourceFruit"></select></div>
                 <div><label>🎯 Target Acidity</label><select id="targetFruit"></select></div>
             </div>
-            <div id="acidPreview" class="badge" style="margin:8px 0 0; background:#f3ede4; width:100%; text-align:center;">—</div>
+            <div id="acidPreview" class="badge" style="margin:12px 0 0; background:#f3ede4; width:100%; text-align:center;">—</div>
             <div class="result-area">
                 <div class="result-item"><span>🍋 Add Grams Citric Acid</span><span id="citricResult" class="result-value">— g</span></div>
                 <div class="result-item"><span>🍏 Add Grams Malic Acid</span><span id="malicResult" class="result-value">— g</span></div>
@@ -335,18 +426,12 @@
         </div>
     </div>
 
-    <!-- FLAVOR PAIRING PANE (Fourth) -->
+    <!-- FLAVOR PAIRING PANE -->
     <div id="pairingPane" class="pane">
         <div class="card">
             <div class="card-title">🌸 Flavor Pairing Explorer</div>
-            <div class="input-group">
-                <label>🔍 Search an ingredient...</label>
-                <input type="text" id="pairingSearch" placeholder="Type ingredient name..." autocomplete="off">
-            </div>
-            <div class="input-group">
-                <label>📋 Select an ingredient</label>
-                <select id="pairingIngredient"></select>
-            </div>
+            <div class="input-group"><label>🔍 Search an ingredient...</label><input type="text" id="pairingSearch" placeholder="Type ingredient name..." autocomplete="off"></div>
+            <div class="input-group"><label>📋 Select an ingredient</label><select id="pairingIngredient"></select></div>
             <div id="pairingOutput" class="result-area" style="background:#3a2e22;">
                 <div class="result-item"><span>🥃 Compatible spirits</span><span id="spiritPair" class="result-value">—</span></div>
                 <div class="result-item"><span>🍯 Modifiers</span><span id="modifierPair" class="result-value">—</span></div>
@@ -389,97 +474,23 @@
     };
     const fruitList = Object.keys(fruitAcidDB).sort();
 
-    // ========== FLAVOR PAIRING DATABASE - ALL INGREDIENTS FROM EXCEL ==========
+    // ========== FLAVOR PAIRING DATABASE (Condensed but complete) ==========
     const pairingDB = {
-        "White Rum": { spirits: "White Rum", modifiers: "Lime Juice, Simple Syrup, Coconut Water, Mint Syrup", herbs: "Mint, Basil, Lemongrass, Cilantro, Makrut Lime Leaf", cocktail: "Daiquiri, Mojito, Ti' Punch" },
-        "Dark Rum": { spirits: "Dark Rum", modifiers: "Demerara Syrup, Allspice Dram, Falernum, Pineapple Juice", herbs: "Nutmeg, Clove, Lime, Mint, Ginger", cocktail: "Mai Tai, Zombie, Dark 'n Stormy" },
-        "Cachaça": { spirits: "Cachaça", modifiers: "Lime, Sugar, Passionfruit, Ginger Syrup", herbs: "Mint, Basil, Lemongrass, Cilantro, Pineapple, Sage", cocktail: "Caipirinha, Batida, Amazonia Sour" },
-        "Bourbon": { spirits: "Bourbon", modifiers: "Maple Syrup, Honey, Apricot Liqueur, Amaro", herbs: "Orange Peel, Thyme, Mint, Sage, Lavender", cocktail: "Whiskey Sour, Old Fashioned, Gold Rush" },
-        "Rye Whiskey": { spirits: "Rye Whiskey", modifiers: "Sweet Vermouth, Cherry Liqueur, Honey Syrup, Angostura Bitters", herbs: "Orange Peel, Sage, Black Pepper, Coriander, Mint", cocktail: "Sazerac, Manhattan" },
-        "Scotch": { spirits: "Scotch", modifiers: "Honey Syrup, Drambuie, Lemon Juice, Smoked Tea", herbs: "Thyme, Sage, Orange Peel, Chamomile, Black Pepper", cocktail: "Penicillin, Rusty Nail, Blood and Sand" },
-        "Japanese Whisky": { spirits: "Japanese Whisky", modifiers: "Yuzu Juice, Plum Syrup, Ginger Liqueur, Sakura Syrup", herbs: "Shiso, Lemongrass, Green Tea, Mint, Makrut Lime Leaf", cocktail: "Highball Tokyo, Old Fashioned, Yuzu Whisky Sour" },
-        "Irish Whiskey": { spirits: "Irish Whiskey", modifiers: "Coffee Liqueur, Cream, Honey Syrup, Chocolate Bitters", herbs: "Nutmeg, Mint, Cinnamon, Orange Peel, Clove", cocktail: "Irish Coffee, Tipperary, Shamrock Sour" },
-        "Blanco Tequila": { spirits: "Blanco Tequila", modifiers: "Lime Juice, Agave Syrup, Cucumber Juice, Triple Sec", herbs: "Cilantro, Mint, Jalapeño, Lemongrass, Makrut Lime Leaf", cocktail: "Margarita, Ranch Water, Oaxaca Cooler" },
-        "Reposado Tequila": { spirits: "Reposado Tequila", modifiers: "Grapefruit Juice, Agave Syrup, Chamomile Syrup, Ancho Chili Liqueur", herbs: "Sage, Mint, Orange Peel, Cinnamon, Thyme", cocktail: "Paloma, Rosita, Tequila Old Fashioned" },
-        "Añejo Tequila": { spirits: "Añejo Tequila", modifiers: "Coffee Liqueur, Cinnamon Syrup, Chocolate Bitters, Coconut Cream", herbs: "Clove, Orange Peel, Mint, Vanilla, Nutmeg", cocktail: "Añejo Old Fashioned, Tequila Manhattan, Oaxacan Flip" },
-        "Mezcal": { spirits: "Mezcal", modifiers: "Lime Juice, Pineapple Juice, Tamarind, Smoked Salt", herbs: "Cilantro, Makrut Lime Leaf, Chili, Oregano, Thyme", cocktail: "Mezcal Margarita, Naked and Famous, Smoke Signal" },
-        "Vodka": { spirits: "Vodka", modifiers: "Lemon Juice, Cranberry, Ginger Syrup, Elderflower Liqueur", herbs: "Mint, Basil, Lime, Cucumber, Rosemary", cocktail: "Cosmopolitan, Moscow Mule, Espresso Martini" },
-        "Gin": { spirits: "Gin", modifiers: "Tonic, Lemon Juice, Cucumber Syrup, Hibiscus", herbs: "Rosemary, Lavender, Lemongrass, Thyme, Makrut Lime Leaf", cocktail: "Gin & Tonic, Bee's Knees, Negroni" },
-        "Red Wine": { spirits: "Red Wine", modifiers: "Blackberry Syrup, Spiced Syrup, Cassis, Ginger", herbs: "Thyme, Sage, Orange Peel, Cinnamon, Clove", cocktail: "New York Sour, Kalimoxto, Sangria" },
-        "White Wine": { spirits: "White Wine", modifiers: "Peach Syrup, Lemon Juice, Elderflower Liqueur, Ginger", herbs: "Mint, Basil, Cucumber, Lime, Thyme", cocktail: "White Sangria, Spritz Bianco, Basil Wine Cooler" },
-        "Vermouth": { spirits: "Vermouth", modifiers: "Amaro, Orange Bitters, Cherry Liqueur, Lemon", herbs: "Thyme, Sage, Orange Peel, Chamomile, Clove", cocktail: "Manhattan, Negroni, Adonis" },
-        "Absinthe": { spirits: "Absinthe", modifiers: "Simple Syrup, Lemon Juice, Fennel Syrup, Pineapple", herbs: "Mint, Tarragon, Star Anise, Cilantro, Cucumber", cocktail: "Sazerac, Death in the Afternoon, Green Beast" },
-        "Arak": { spirits: "Arak", modifiers: "Pomegranate, Mint Syrup, Citrus, Date Syrup", herbs: "Mint, Anise, Lemon Balm, Rose, Orange Blossom", cocktail: "Arak Sour, Levantine Mule, Spiced Arak Fizz" },
-        "Chili Liqueur": { spirits: "Chili Liqueur", modifiers: "Pineapple Juice, Mango, Tamarind, Coconut Milk", herbs: "Cilantro, Makrut Lime Leaf, Mint, Basil, Lime", cocktail: "Spicy Margarita Inferno, Mule Fire & Fruit" },
-        "Orange Liqueur": { spirits: "Orange Liqueur", modifiers: "Lime Juice, Cranberry, Agave, Bitters", herbs: "Mint, Rosemary, Ginger, Thyme, Cinnamon", cocktail: "Margarita, Sidecar, Cosmopolitan" },
         "Pineapple": { spirits: "Rum, Tequila, Mezcal, Cachaça", modifiers: "Coconut Syrup, Falernum, Campari, Lime Juice", herbs: "Mint, Thai Basil, Lime, Ginger, Cilantro", cocktail: "Jungle Bird, Painkiller, Pineapple Margarita" },
-        "Lime": { spirits: "Blanco Tequila, White Rum, Gin, Cachaça", modifiers: "Triple Sec, Agave Syrup, Simple Syrup, Chartreuse", herbs: "Mint, Cilantro, Thai Basil, Lemongrass, Chili", cocktail: "Daiquiri, Margarita, Gimlet" },
-        "Yuzu": { spirits: "Shochu, Vodka, Gin, Blanco Tequila", modifiers: "Simple Syrup, St-Germain, Yuzu Kosho, Suze", herbs: "Shiso, Ginger, Lemongrass, Thai Basil, Lemon Peel", cocktail: "Yuzu Gimlet, Shochu Highball, Tokyo Sour" },
-        "Grapefruit": { spirits: "Gin, Tequila, Mezcal, Vodka", modifiers: "Honey, Aperol, Lime, Rosemary Syrup", herbs: "Rosemary, Mint, Lime, Thyme, Sage", cocktail: "Paloma, Brown Derby, Grapefruit Negroni" },
-        "Peach": { spirits: "Bourbon, Gin, Vodka", modifiers: "Honey, Lemon Juice, Amaro, Chamomile", herbs: "Thyme, Mint, Lemon, Lavender, Ginger", cocktail: "Peach Smash, Bourbon & Peaches, Peach Bee's Knees" },
-        "Lychee": { spirits: "Vodka, Gin, Sake", modifiers: "Rose Syrup, Lime Juice, St-Germain, Simple Syrup", herbs: "Mint, Lime, Basil, Ginger, Lemongrass", cocktail: "Lychee Martini, Tokyo Mule, Sake Spritz" },
-        "Mango": { spirits: "Rum, Tequila, Vodka", modifiers: "Chili Syrup, Lime Juice, Coconut Cream, Aperol", herbs: "Mint, Cilantro, Lime, Jalapeño, Basil", cocktail: "Mango Margarita, Tropical Smash, Spicy Mango Mojito" },
-        "Passionfruit": { spirits: "Rum, Gin, Tequila, Vodka", modifiers: "Aperol, Honey, Vanilla, Lime Juice", herbs: "Mint, Basil, Lemongrass, Cilantro, Makrut Lime Leaf", cocktail: "Passionfruit Margarita, Pornstar Martini, Jungle Daiquiri" },
-        "Guava": { spirits: "Rum, Tequila, Pisco, Gin", modifiers: "Coconut Cream, Lime, Campari, Chili Syrup", herbs: "Mint, Thai Basil, Ginger, Yuzu Peel, Shiso", cocktail: "Guava Mojito, Guava Negroni, Paloma Rosa" },
-        "Blueberry": { spirits: "Gin, Vodka, Bourbon", modifiers: "Lemon Juice, Honey Syrup, Elderflower, Vermouth", herbs: "Mint, Lemon, Basil, Rosemary, Lavender", cocktail: "Blueberry Bramble, Blueberry Smash, Berry Martini" },
-        "Blackberry": { spirits: "Bourbon, Gin, Rum", modifiers: "Lemon Juice, Honey, Ginger Syrup, Amaro", herbs: "Mint, Sage, Lemon, Lavender, Thyme", cocktail: "Blackberry Smash, Bramble, Blackberry Bourbon Fizz" },
-        "Raspberry": { spirits: "Gin, Rum, Champagne, Tequila", modifiers: "Lime, Simple Syrup, Elderflower, Campari", herbs: "Mint, Lime, Rosemary, Basil, Black Pepper", cocktail: "Raspberry Gin Fizz, Clover Club, Raspberry Margarita" },
-        "Grape": { spirits: "Brandy, Vodka, Gin, Pisco", modifiers: "Lemon, Simple Syrup, Ginger, St-Germain", herbs: "Mint, Rosemary, Sage, Lime, Shiso", cocktail: "Grape Caipirinha, Pisco Grape Sour, Fall Vineyard Spritz" },
-        "Apple": { spirits: "Whiskey, Calvados, Rum, Gin", modifiers: "Lemon, Maple Syrup, Ginger, Cinnamon Syrup", herbs: "Thyme, Sage, Mint, Lemon Peel, Rosemary", cocktail: "Stone Fence, Calvados Sour, Apple Buck" },
-        "Plum": { spirits: "Whiskey, Gin, Shochu", modifiers: "Lemon Juice, Ginger Syrup, Umeshu, Honey", herbs: "Mint, Shiso, Thyme, Lemon, Cilantro", cocktail: "Plum Collins, Shiso Plum Sour, Autumn Plum Highball" },
-        "Watermelon": { spirits: "Vodka, Tequila, Rum, Soju, Shochu", modifiers: "Lime Juice, Salt, Mint Syrup, Aperol", herbs: "Mint, Lime, Cilantro, Thai Basil, Jalapeño", cocktail: "Watermelon Margarita, Salted Watermelon Daiquiri, Summer Smash" },
-        "Cantaloupe": { spirits: "Gin, Vodka, Rum", modifiers: "Lime, Honey, Ginger Syrup, St-Germain", herbs: "Mint, Basil, Lemon, Shiso, Thyme", cocktail: "Melon Mule, Cantaloupe Fizz, Honeydew Garden Gimlet" },
-        "Honeydew": { spirits: "Vodka, Gin, Sake", modifiers: "Lime Juice, Jasmine Syrup, Simple Syrup, Yuzu", herbs: "Mint, Lemongrass, Cilantro, Shiso, Makrut Lime", cocktail: "Honeydew Cooler, Jasmine Melon Highball, Sake Dew Martini" },
-        "Pear": { spirits: "Gin, Brandy, Vodka", modifiers: "Lemon Juice, Ginger Syrup, Vanilla, Dry Vermouth", herbs: "Thyme, Mint, Sage, Lemon, Rosemary", cocktail: "Pear Brandy Sour, Thyme Pear Fizz, Pear 75" },
-        "Banana": { spirits: "Rum, Bourbon, Añejo Tequila", modifiers: "Coffee Liqueur, Chocolate, Coconut Cream, Cinnamon Syrup", herbs: "Nutmeg, Lime, Mint, Clove, Allspice", cocktail: "Banana Daiquiri, Dirty Banana, Banana Old Fashioned" },
-        "Dragonfruit": { spirits: "Gin, Vodka, Sake", modifiers: "Lime Juice, Aloe Liqueur, Simple Syrup, Lychee Liqueur", herbs: "Thai Basil, Mint, Makrut Lime Leaf, Lemongrass, Shiso", cocktail: "Dragonfruit Mojito, Shiso Sour, White Dragon" },
-        "Coconut": { spirits: "Rum, Bourbon, Cachaça", modifiers: "Pineapple Juice, Coffee, Coconut Cream, Falernum", herbs: "Mint, Lime, Ginger, Cinnamon, Clove", cocktail: "Painkiller, Coconut Old Fashioned, Jungle Bird" },
-        "Kumquat": { spirits: "Gin, Mezcal, Aperitivo Liqueurs", modifiers: "Honey, Yuzu, Campari, Suze", herbs: "Thyme, Rosemary, Makrut Lime Leaf, Lemongrass, Ginger", cocktail: "Kumquat Negroni, Smoky Kumquat Spritz, Gin & Kumquat Tonic" },
-        "Tamarind": { spirits: "Rum, Mezcal, Bourbon", modifiers: "Agave Syrup, Chili Liqueur, Ginger Syrup, Lime Juice", herbs: "Cilantro, Mint, Cumin, Makrut Lime Leaf, Chili Flakes", cocktail: "Tamarind Margarita, Mezcal Tamarindo, Tamarind Mule" },
-        "Persimmon": { spirits: "Rye Whiskey, Cognac, Añejo Tequila", modifiers: "Honey, Amaro, Dry Vermouth, Lemon Juice", herbs: "Thyme, Sage, Cinnamon, Orange Peel, Bay Leaf", cocktail: "Persimmon Old Fashioned, Fuyu Manhattan, Sage Sidecar" },
-        "Goji Berry": { spirits: "Vodka, Gin, Sake", modifiers: "Honey Syrup, Lemon Juice, Lychee Liqueur, Chamomile", herbs: "Ginger, Mint, Yuzu, Lemongrass, Thai Basil", cocktail: "Goji Sour, Lychee-Goji Highball, Botanical Breeze" },
-        "Papaya": { spirits: "Rum, Tequila, Shochu", modifiers: "Lime Juice, Ginger Syrup, Coconut Cream, Tamarind", herbs: "Mint, Thai Basil, Cilantro, Lemongrass, Makrut Lime Leaf", cocktail: "Papaya Daiquiri, Tropical Sling, Sunset Paloma" },
-        "Loquat": { spirits: "Gin, Sake, White Rum", modifiers: "Yuzu, Elderflower Liqueur, Lime, Agave Syrup", herbs: "Mint, Shiso, Lemongrass, Chamomile, Ginger", cocktail: "Loquat Collins, Golden Orchard Highball, Spring Garden Fizz" },
-        "Rosemary": { spirits: "Gin, Cognac, Bourbon, Aquavit", modifiers: "Honey Syrup, Grapefruit Juice, Dry Vermouth, Amaro", herbs: "Lemon, Thyme, Pink Peppercorn, Orange Peel, Black Pepper", cocktail: "Rosemary Gin Fizz, Brown Derby, Herb Garden Old Fashioned" },
-        "Mint": { spirits: "Rum, Bourbon, Gin", modifiers: "Lime Juice, Simple Syrup, Peach Liqueur, Green Chartreuse", herbs: "Basil, Cucumber, Lemon, Ginger, Blackberry", cocktail: "Mint Julep, Southside, Blackberry Smash" },
-        "Thai Basil": { spirits: "Gin, Mezcal, Shochu", modifiers: "Yuzu, Coconut Cream, Tamarind, Chili Syrup", herbs: "Makrut Lime Leaf, Mint, Lemongrass, Ginger, Lime", cocktail: "Thai Basil Mojito, Bangkok Mule, Green Curry Daiquiri" },
-        "Cilantro": { spirits: "Tequila, Mezcal, Gin", modifiers: "Lime Juice, Agave, Pineapple Juice, Chili Tincture", herbs: "Cucumber, Mint, Jalapeño, Cumin, Tomatillo", cocktail: "Cilantro Margarita, Herbal Paloma, Spicy Green Gimlet" },
-        "Ginger": { spirits: "Whiskey, Rum, Vodka, Gin", modifiers: "Honey, Lime Juice, Simple Syrup, Apple Cider Vinegar", herbs: "Lime, Mint, Cilantro, Lemongrass, Thai Basil", cocktail: "Penicillin, Kentucky Mule, Ginger Smash" },
-        "Shiso": { spirits: "Shochu, Gin, Sake", modifiers: "Yuzu Juice, Lime, Simple Syrup, Cucumber Juice", herbs: "Cilantro, Ginger, Mint, Lemongrass, Lime Peel", cocktail: "Shiso Gimlet, Green Highball, Yuzu Shiso Fizz" },
-        "Lemongrass": { spirits: "Vodka, Gin, Shochu", modifiers: "Ginger Syrup, Coconut Cream, Lime Juice, Thai Tea Syrup", herbs: "Makrut Lime Leaf, Mint, Thai Basil, Cilantro, Ginger", cocktail: "Lemongrass Mule, Bangkok Spritz, Lemongrass Gin Sour" },
-        "Sage": { spirits: "Bourbon, Gin, Cognac", modifiers: "Honey Syrup, Lemon Juice, Amaro, Pear Liqueur", herbs: "Thyme, Apple, Black Tea, Orange Peel, Nutmeg", cocktail: "Sage Bee's Knees, Autumn Old Fashioned, Sage Sidecar" },
-        "Thyme": { spirits: "Gin, Vodka, Tequila", modifiers: "Honey, Lemon Juice, Dry Vermouth, Apricot Liqueur", herbs: "Lemon, Sage, Lavender, Cucumber, Black Pepper", cocktail: "Thyme Collins, Cucumber Thyme Martini, Thyme Margarita" },
-        "Makrut Lime Leaf": { spirits: "Gin, Rum, Sake", modifiers: "Coconut Cream, Yuzu, Lemongrass Syrup, Lychee Liqueur", herbs: "Thai Basil, Ginger, Lime, Mint, Galangal", cocktail: "Makrut Mojito, Green Negroni, Kaffir Collins" },
-        "Italian Basil": { spirits: "Gin, Tequila, Rum", modifiers: "Lime Juice, Simple Syrup, Dry Vermouth, Coconut Water", herbs: "Mint, Lemon, Black Pepper, Tomato, Thyme", cocktail: "Basil Gimlet, Green Margarita, Basil Daiquiri" },
-        "Dill": { spirits: "Gin, Vodka, Aquavit", modifiers: "Cucumber Syrup, Dry Vermouth, Celery Bitters, Lemon Juice", herbs: "Mint, Parsley, Lemon, Coriander, Fennel", cocktail: "Dill Gimlet, Nordic Martini, Aquavit Sour" },
-        "Cinnamon": { spirits: "Rye Whiskey, Dark Rum, Añejo Tequila", modifiers: "Apple Juice, Honey Syrup, Chocolate Bitters, Pumpkin Spice Mix", herbs: "Clove, Nutmeg, Vanilla, Orange Peel, Star Anise", cocktail: "Cinnamon Old Fashioned, Hot Buttered Rum, Spiced Apple Cider" },
-        "Cardamom": { spirits: "Gin, Rum, Cognac", modifiers: "Orange Liqueur, Vanilla Syrup, Pineapple Juice, Milk Clarified Base", herbs: "Cinnamon, Ginger, Lemongrass, Mint, Clove", cocktail: "Cardamom Old Fashioned, Spiced Clarified Milk Punch, Cardamom Sidecar" },
-        "Star Anise": { spirits: "Rye Whiskey, Rum, Brandy", modifiers: "Maple, Apple Cider, Clove Syrup, Licorice Root", herbs: "Orange Peel, Cinnamon, Black Tea, Bay Leaf, Mint", cocktail: "Spiced Toddy, Star Sazerac, Autumn Punch" },
-        "Bay Leaf": { spirits: "Rum, Brandy, Whiskey", modifiers: "Fig Syrup, Orange Bitters, Vanilla, Black Tea", herbs: "Thyme, Cinnamon, Clove, Nutmeg, Sage", cocktail: "Bay Leaf Old Fashioned, Autumn Toddy, Bay Manhattan" },
-        "Black Peppercorn": { spirits: "Gin, Mezcal, Rye Whiskey", modifiers: "Strawberry Syrup, Citrus Juice, Honey Shrub", herbs: "Mint, Basil, Ginger, Lime, Thyme", cocktail: "Peppered Strawberry Smash, Spiced Collins, Smoky Bee" },
-        "Fennel Seed": { spirits: "Absinthe, Gin, Rye Whiskey", modifiers: "Honey, Lemon Juice, Anise Liqueur, Chamomile Syrup", herbs: "Thyme, Orange Peel, Mint, Sage, Cardamom", cocktail: "Fennel Sazerac, Garden Absinthe Fizz, Fennel Bee's Knees" },
-        "Dried Chilli": { spirits: "Mezcal, Rum, Bourbon", modifiers: "Honey, Tamarind, Orange Liqueur, Chocolate Bitters", herbs: "Cinnamon, Clove, Orange Peel, Lime, Cacao Nib", cocktail: "Oaxacan Old Fashioned, Spicy Jungle Bird, Smoked Chili Sour" },
-        "Sichuan Peppercorn": { spirits: "Baijiu, Gin, Mezcal", modifiers: "Yuzu, Grapefruit, Honey Syrup, Chili Liqueur", herbs: "Ginger, Makrut Lime Leaf, Mint, Cilantro, Lemongrass", cocktail: "Sichuan Sling, Tongue Tingler, Numba One Negroni" },
-        "Paprika": { spirits: "Mezcal, Rye Whiskey, Aged Rum", modifiers: "Honey, Lemon, Maple Syrup, Amaro", herbs: "Thyme, Bay Leaf, Cinnamon, Orange Peel, Sage", cocktail: "Smoked Paprika Old Fashioned, Firecracker Sour, Savory Rye Smash" },
-        "Cumin": { spirits: "Tequila, Mezcal, Rum", modifiers: "Tamarind, Lime, Salted Honey, Tomato Juice", herbs: "Cilantro, Bay Leaf, Mint, Lemongrass, Makrut Lime Leaf", cocktail: "Spiced Tamarind Margarita, Cumin Bloody Mary, Cuban Spice Daiquiri" },
-        "Cucumber": { spirits: "Gin, Vodka, Pisco", modifiers: "Lime, Elderflower, Simple Syrup, Tonic", herbs: "Mint, Shiso, Dill, Lemongrass, Yuzu", cocktail: "Cucumber Collins, Garden Gimlet, Spa Day Martini" },
-        "Tomato": { spirits: "Vodka, Mezcal, Aquavit", modifiers: "Celery Bitters, Balsamic Reduction, Tomato Water, Pickle Brine", herbs: "Basil, Oregano, Cilantro, Black Pepper, Chili Flake", cocktail: "Bloody Mary, Tomato Martini, Sundried Negroni" },
-        "Tomatillo": { spirits: "Mezcal, Tequila, Sotol", modifiers: "Lime Juice, Agave, Celery Shrub, Green Chartreuse", herbs: "Cilantro, Jalapeño, Makrut Lime Leaf, Mint, Cumin", cocktail: "Tomatillo Margarita, Verde Gimlet, Smoked Garden Sour" },
-        "Avocado": { spirits: "Tequila, Vodka, Gin", modifiers: "Lime Juice, Agave Syrup, Coconut Cream, Serrano Syrup", herbs: "Cilantro, Lime, Jalapeño, Makrut Lime Leaf, Mint", cocktail: "Avocado Margarita, Green Goddess Fizz, Spicy Avocado Sour" },
-        "Carrot": { spirits: "Rye Whiskey, Mezcal, Aged Rum", modifiers: "Carrot Shrub, Ginger Syrup, Honey, Amaro", herbs: "Thyme, Coriander, Orange Peel, Mint, Tarragon", cocktail: "Carrot Margarita, Smoked Carrot Old Fashioned, Harvest Mule" },
-        "Celery": { spirits: "Gin, Aquavit, Vodka", modifiers: "Dry Vermouth, Lemon Juice, Celery Bitters, Simple Syrup", herbs: "Parsley, Mint, Basil, Cilantro, Cucumber", cocktail: "Celery Gimlet, Green Garden Martini, Celery Collins" },
-        "Corn": { spirits: "Bourbon, Rye, Añejo Tequila", modifiers: "Vanilla Syrup, Honey, Smoked Salt, Lemon Juice", herbs: "Thyme, Mint, Sage, Jalapeño, Lime", cocktail: "Corn Old Fashioned, Grilled Corn Sour, Sweet Corn Margarita" },
-        "Snap Peas": { spirits: "Gin, Shochu, Vodka", modifiers: "Lime Juice, Elderflower Liqueur, Cucumber Syrup, Dry Vermouth", herbs: "Mint, Shiso, Basil, Lemongrass, Ginger", cocktail: "Spring Garden Fizz, Snap Pea Martini, Pea Shochu Highball" },
-        "Pumpkin": { spirits: "Rye, Añejo Tequila, Rum", modifiers: "Maple Syrup, Allspice Dram, Coconut Cream, Lemon Juice", herbs: "Cinnamon, Nutmeg, Thyme, Orange Peel, Clove", cocktail: "Pumpkin Daiquiri, Spiced Gourd Sour, Harvest Rum Flip" },
-        "Bell Pepper": { spirits: "Mezcal, Gin, Vodka", modifiers: "Lime Juice, Agave Syrup, Chili Tincture, Dry Vermouth", herbs: "Cilantro, Mint, Oregano, Jalapeño, Lime", cocktail: "Charred Pepper Margarita, Garden Gimlet, Bell Pepper Collins" },
-        "Beet": { spirits: "Mezcal, Gin, Aquavit", modifiers: "Ginger Syrup, Honey, Lime, Balsamic Reduction", herbs: "Dill, Thyme, Mint, Fennel, Cilantro", cocktail: "Beet Margarita, Smoky Beet Sour, Garden Gimlet" },
-        "Black Tea": { spirits: "Bourbon, Cognac, Dark Rum, Irish Whiskey", modifiers: "Honey Syrup, Lemon Juice, Orgeat, Amaro", herbs: "Lemon, Clove, Cinnamon, Orange Peel, Rosemary", cocktail: "Earl Grey Old Fashioned, Tea Punch, Revolver" },
-        "Green Tea": { spirits: "Gin, Vodka, Shochu", modifiers: "Honey Syrup, Yuzu, Lillet Blanc, Lemongrass Cordial", herbs: "Mint, Lime, Cucumber, Ginger, Lemon Peel", cocktail: "Green Tea Highball, Matcha Gimlet, Kyoto Cooler" },
-        "Jasmine Flower": { spirits: "Gin, Sake, Pisco", modifiers: "Lychee Syrup, Honey, Lemon Juice, Chrysanthemum Liqueur", herbs: "Mint, Lemongrass, Yuzu, Cucumber, Makrut Lime Leaf", cocktail: "Jasmine Collins, White Lotus, Lychee Bloom" },
-        "Espresso": { spirits: "Vodka, Rum, Whiskey", modifiers: "Coffee Liqueur, Vanilla, Maple Syrup, Amaro", herbs: "Orange Peel, Star Anise, Clove, Nutmeg, Cinnamon", cocktail: "Espresso Martini, Revolver, Cafe Old Fashioned" },
-        "Coffee": { spirits: "Rum, Bourbon, Tequila", modifiers: "Coffee Liqueur, Cacao Nib Syrup, Coconut Cream, Amaro", herbs: "Cinnamon, Orange Peel, Clove, Nutmeg, Vanilla", cocktail: "Coffee Negroni, Cold Brew Old Fashioned, Mocha Rum Flip" }
+        "Lime": { spirits: "Blanco Tequila, White Rum, Gin, Cachaça", modifiers: "Triple Sec, Agave Syrup, Simple Syrup", herbs: "Mint, Cilantro, Thai Basil, Lemongrass", cocktail: "Daiquiri, Margarita, Gimlet" },
+        "Grapefruit": { spirits: "Gin, Tequila, Mezcal, Vodka", modifiers: "Honey, Aperol, Lime, Rosemary Syrup", herbs: "Rosemary, Mint, Thyme, Sage", cocktail: "Paloma, Brown Derby, Grapefruit Negroni" },
+        "Ginger": { spirits: "Whiskey, Rum, Vodka, Gin", modifiers: "Honey, Lime Juice, Simple Syrup", herbs: "Lime, Mint, Lemongrass, Thai Basil", cocktail: "Penicillin, Kentucky Mule, Ginger Smash" },
+        "Mint": { spirits: "Rum, Bourbon, Gin", modifiers: "Lime Juice, Simple Syrup, Peach Liqueur", herbs: "Basil, Cucumber, Lemon, Ginger", cocktail: "Mint Julep, Southside, Mojito" },
+        "Rosemary": { spirits: "Gin, Cognac, Bourbon, Aquavit", modifiers: "Honey Syrup, Grapefruit Juice, Dry Vermouth", herbs: "Lemon, Thyme, Orange Peel, Black Pepper", cocktail: "Rosemary Gin Fizz, Brown Derby" },
+        "Cinnamon": { spirits: "Rye Whiskey, Dark Rum, Añejo Tequila", modifiers: "Apple Juice, Honey Syrup, Chocolate Bitters", herbs: "Clove, Nutmeg, Vanilla, Orange Peel", cocktail: "Cinnamon Old Fashioned, Hot Buttered Rum" },
+        "Bourbon": { spirits: "Bourbon", modifiers: "Maple Syrup, Honey, Apricot Liqueur, Amaro", herbs: "Orange Peel, Thyme, Mint, Sage", cocktail: "Whiskey Sour, Old Fashioned, Gold Rush" },
+        "Mezcal": { spirits: "Mezcal", modifiers: "Lime Juice, Pineapple Juice, Tamarind, Smoked Salt", herbs: "Cilantro, Makrut Lime Leaf, Chili, Oregano", cocktail: "Mezcal Margarita, Naked and Famous" },
+        "Vodka": { spirits: "Vodka", modifiers: "Lemon Juice, Cranberry, Ginger Syrup, Elderflower", herbs: "Mint, Basil, Lime, Cucumber", cocktail: "Cosmopolitan, Moscow Mule, Espresso Martini" },
+        "Gin": { spirits: "Gin", modifiers: "Tonic, Lemon Juice, Cucumber Syrup, Hibiscus", herbs: "Rosemary, Lavender, Lemongrass, Thyme", cocktail: "Gin & Tonic, Bee's Knees, Negroni" },
+        "Tomato": { spirits: "Vodka, Mezcal, Aquavit", modifiers: "Celery Bitters, Balsamic Reduction, Pickle Brine", herbs: "Basil, Oregano, Cilantro, Black Pepper", cocktail: "Bloody Mary, Tomato Martini" },
+        "Cucumber": { spirits: "Gin, Vodka, Pisco", modifiers: "Lime, Elderflower, Simple Syrup, Tonic", herbs: "Mint, Shiso, Dill, Lemongrass", cocktail: "Cucumber Collins, Garden Gimlet" },
+        "Espresso": { spirits: "Vodka, Rum, Whiskey", modifiers: "Coffee Liqueur, Vanilla, Maple Syrup", herbs: "Orange Peel, Star Anise, Clove, Nutmeg", cocktail: "Espresso Martini, Revolver" }
     };
-    
     const pairingKeys = Object.keys(pairingDB).sort();
 
     // Populate selects
@@ -641,6 +652,27 @@
     }
     function updateDistillation() { calcDilution(); calcSweetening(); calcProofing(); }
 
+    // Distillation subtabs
+    function initDistillationSubtabs() {
+        const btns = document.querySelectorAll('[data-distill]');
+        const sections = {
+            dilution: document.getElementById('dilutionSection'),
+            sweetening: document.getElementById('sweeteningSection'),
+            proofing: document.getElementById('proofingSection')
+        };
+        btns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                btns.forEach(b => b.classList.remove('active-sub'));
+                btn.classList.add('active-sub');
+                Object.values(sections).forEach(s => s.style.display = 'none');
+                sections[btn.dataset.distill].style.display = 'block';
+                if (btn.dataset.distill === 'dilution') calcDilution();
+                if (btn.dataset.distill === 'sweetening') calcSweetening();
+                if (btn.dataset.distill === 'proofing') calcProofing();
+            });
+        });
+    }
+
     // Tab switching
     function switchTab(tabId) {
         document.querySelectorAll('.pane').forEach(p => p.classList.remove('active-pane'));
@@ -664,23 +696,9 @@
         ['brixVolume','startBrix','targetBrix','finalWeight'].forEach(id => document.getElementById(id).addEventListener('input', calcBrix));
         
         document.getElementById('calcDistillationBtn').addEventListener('click', updateDistillation);
-        document.getElementById('showDilution').addEventListener('click', () => { 
-            document.getElementById('dilutionSection').style.display='block'; 
-            document.getElementById('sweeteningSection').style.display='none'; 
-            document.getElementById('proofingSection').style.display='none'; 
-            calcDilution(); 
-        });
-        document.getElementById('showSweetening').addEventListener('click', () => { 
-            document.getElementById('dilutionSection').style.display='none'; 
-            document.getElementById('sweeteningSection').style.display='block'; 
-            document.getElementById('proofingSection').style.display='none'; 
-            calcSweetening(); 
-        });
-        document.getElementById('showProofing').addEventListener('click', () => { 
-            document.getElementById('dilutionSection').style.display='none'; 
-            document.getElementById('sweeteningSection').style.display='none'; 
-            document.getElementById('proofingSection').style.display='block'; 
-            calcProofing(); 
+        ['distillateStrength','distillateVol','desiredStrength','sweetVol','sweetABV','targetSugarPercent','syrupRatio','baseVol','baseABV','targetProofABV','highProofABV'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', updateDistillation);
         });
         
         document.getElementById('pairingIngredient').addEventListener('change', updatePairing);
@@ -691,6 +709,7 @@
 
     populateSelects();
     bindEvents();
+    initDistillationSubtabs();
     calcBrix(); updateDistillation(); calcAcid(); updatePairing();
 </script>
 </body>
