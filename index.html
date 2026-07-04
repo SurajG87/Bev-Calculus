@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Bev Cal · Brix & Distillation</title>
-    <!-- Apple Touch Icon (placeholder) -->
     <link rel="apple-touch-icon" href="logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -21,7 +20,7 @@
         body {
             background: #f4efe7;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 16px 16px 40px;
+            padding: 16px;
             color: #2c2418;
             min-height: 100vh;
         }
@@ -32,7 +31,6 @@
             width: 100%;
         }
 
-        /* --- HEADER --- */
         .tool-header {
             text-align: center;
             margin-bottom: 24px;
@@ -42,8 +40,8 @@
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #c47b3e, #9b4b2c);
-            background-clip: text;
             -webkit-background-clip: text;
+            background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
         }
@@ -54,7 +52,6 @@
             font-weight: 400;
         }
 
-        /* --- TABS --- */
         .tabs-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -90,7 +87,6 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
-        /* --- PANES --- */
         .pane {
             display: none;
             animation: fade 0.2s ease;
@@ -103,7 +99,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- CARDS --- */
         .card {
             background: #fffef7;
             border-radius: 40px;
@@ -126,7 +121,6 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* --- FORM ELEMENTS --- */
         .input-group {
             margin-bottom: 18px;
         }
@@ -184,12 +178,14 @@
             transition: 0.15s;
             font-family: 'Inter', sans-serif;
         }
+        button:hover {
+            background: #c47a34;
+        }
         button:active {
             transform: scale(0.97);
             background: #bb7536;
         }
 
-        /* --- RESULT AREA (dark warm) --- */
         .result-area {
             background: #2c2418;
             border-radius: 32px;
@@ -247,9 +243,7 @@
             text-decoration: none;
             font-weight: 500;
         }
-        hr { margin: 16px 0; border-color: #ede3d6; }
 
-        /* --- DISTILLATION SUBTABS --- */
         .distillation-subtabs {
             display: flex;
             gap: 10px;
@@ -269,10 +263,9 @@
             color: white;
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             body {
-                padding: 12px 12px 32px;
+                padding: 12px;
             }
             .card {
                 padding: 18px 14px;
@@ -335,7 +328,6 @@
         <p>Brix · Distillation · Acid · Pairing — precision for beverage professionals</p>
     </div>
 
-    <!-- TABS -->
     <div class="tabs-wrapper">
         <div class="tabs">
             <button class="tab-btn active" data-tab="brix">📊 Brix Cal</button>
@@ -345,7 +337,7 @@
         </div>
     </div>
 
-    <!-- ===== BRIX PANE ===== -->
+    <!-- BRIX PANE -->
     <div id="brixPane" class="pane active-pane">
         <div class="card">
             <div class="card-title">📊 Brix Cal · sugar &amp; gum adjustment</div>
@@ -369,7 +361,7 @@
         </div>
     </div>
 
-    <!-- ===== DISTILLATION PANE ===== -->
+    <!-- DISTILLATION PANE -->
     <div id="distillationPane" class="pane">
         <div class="card">
             <div class="card-title">⚗️ Spirit Calculators · Dilution &amp; Sweetening &amp; Proofing</div>
@@ -430,7 +422,7 @@
         </div>
     </div>
 
-    <!-- ===== ACID PANE ===== -->
+    <!-- ACID PANE -->
     <div id="acidPane" class="pane">
         <div class="card">
             <div class="card-title">⚖️ Acid Adjustment · match any fruit's acidity</div>
@@ -449,7 +441,7 @@
         </div>
     </div>
 
-    <!-- ===== PAIRING PANE ===== -->
+    <!-- PAIRING PANE -->
     <div id="pairingPane" class="pane">
         <div class="card">
             <div class="card-title">🌸 Flavor Pairing Explorer</div>
@@ -470,7 +462,6 @@
 </div>
 
 <script>
-    // ========== ACID DATABASE ==========
     const fruitAcidDB = {
         "Lemon": { citric: 5.50, malic: 0.10, total: 5.60 },
         "Lime": { citric: 3.75, malic: 1.75, total: 5.50 },
@@ -497,7 +488,6 @@
     };
     const fruitList = Object.keys(fruitAcidDB).sort();
 
-    // ========== FLAVOR PAIRING DATABASE ==========
     const pairingDB = {
         "Pineapple": { spirits: "Rum, Tequila, Mezcal, Cachaça", modifiers: "Coconut Syrup, Falernum, Campari, Lime Juice", herbs: "Mint, Thai Basil, Lime, Ginger, Cilantro", cocktail: "Jungle Bird, Painkiller, Pineapple Margarita" },
         "Lime": { spirits: "Blanco Tequila, White Rum, Gin, Cachaça", modifiers: "Triple Sec, Agave Syrup, Simple Syrup", herbs: "Mint, Cilantro, Thai Basil, Lemongrass", cocktail: "Daiquiri, Margarita, Gimlet" },
@@ -516,7 +506,6 @@
     };
     const pairingKeys = Object.keys(pairingDB).sort();
 
-    // Populate selects
     function populateSelects() {
         const src = document.getElementById('sourceFruit'), tgt = document.getElementById('targetFruit');
         fruitList.forEach(f => { src.add(new Option(f,f)); tgt.add(new Option(f,f)); });
@@ -528,7 +517,6 @@
         pairSel.value = "Pineapple";
     }
 
-    // ACID CALCULATION
     function calcAcid() {
         let mass = parseFloat(document.getElementById('acidMass').value) || 0;
         const source = fruitAcidDB[document.getElementById('sourceFruit').value];
@@ -563,7 +551,6 @@
         }
     }
 
-    // PAIRING
     function updatePairing() {
         const ing = document.getElementById('pairingIngredient').value;
         const data = pairingDB[ing];
@@ -596,7 +583,6 @@
         }
     }
 
-    // BRIX
     function calcBrix() {
         let vol = parseFloat(document.getElementById('brixVolume').value) || 0;
         let start = parseFloat(document.getElementById('startBrix').value) || 0;
@@ -622,7 +608,6 @@
         }
     }
 
-    // DISTILLATION
     function calcDilution() {
         let str = parseFloat(document.getElementById('distillateStrength').value) || 0;
         let vol = parseFloat(document.getElementById('distillateVol').value) || 0;
@@ -643,6 +628,7 @@
         document.getElementById('abvReduction').innerHTML = reduction.toFixed(1) + '%';
         document.getElementById('dilutionRatio').innerHTML = `1:${ratio}`;
     }
+
     function calcSweetening() {
         let vol = parseFloat(document.getElementById('sweetVol').value) || 0;
         let abv = parseFloat(document.getElementById('sweetABV').value) || 0;
@@ -659,6 +645,7 @@
         document.getElementById('finalSweetVol').innerHTML = finalVol.toFixed(1) + ' ml';
         document.getElementById('finalABV').innerHTML = finalAbv.toFixed(1) + '%';
     }
+
     function calcProofing() {
         let baseV = parseFloat(document.getElementById('baseVol').value) || 0;
         let baseA = parseFloat(document.getElementById('baseABV').value) || 0;
@@ -673,9 +660,9 @@
         document.getElementById('addSpirit').innerHTML = add.toFixed(1) + ' ml';
         document.getElementById('finalBlendVol').innerHTML = (baseV + add).toFixed(1) + ' ml';
     }
+
     function updateDistillation() { calcDilution(); calcSweetening(); calcProofing(); }
 
-    // Distillation subtabs
     function initDistillationSubtabs() {
         const btns = document.querySelectorAll('[data-distill]');
         const sections = {
@@ -684,19 +671,18 @@
             proofing: document.getElementById('proofingSection')
         };
         btns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', function() {
                 btns.forEach(b => b.classList.remove('active-sub'));
-                btn.classList.add('active-sub');
+                this.classList.add('active-sub');
                 Object.values(sections).forEach(s => s.style.display = 'none');
-                sections[btn.dataset.distill].style.display = 'block';
-                if (btn.dataset.distill === 'dilution') calcDilution();
-                if (btn.dataset.distill === 'sweetening') calcSweetening();
-                if (btn.dataset.distill === 'proofing') calcProofing();
+                sections[this.dataset.distill].style.display = 'block';
+                if (this.dataset.distill === 'dilution') calcDilution();
+                if (this.dataset.distill === 'sweetening') calcSweetening();
+                if (this.dataset.distill === 'proofing') calcProofing();
             });
         });
     }
 
-    // Tab switching
     function switchTab(tabId) {
         document.querySelectorAll('.pane').forEach(p => p.classList.remove('active-pane'));
         document.getElementById(tabId + 'Pane').classList.add('active-pane');
@@ -708,7 +694,6 @@
         if (tabId === 'pairing') updatePairing();
     }
 
-    // Event bindings
     function bindEvents() {
         document.getElementById('calcAcidBtn').addEventListener('click', calcAcid);
         document.getElementById('sourceFruit').addEventListener('change', calcAcid);
@@ -727,14 +712,18 @@
         document.getElementById('pairingIngredient').addEventListener('change', updatePairing);
         document.getElementById('pairingSearch').addEventListener('input', filterPairing);
         
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab'))));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', function() {
+            switchTab(this.getAttribute('data-tab'));
+        }));
     }
 
-    // Init
     populateSelects();
     bindEvents();
     initDistillationSubtabs();
-    calcBrix(); updateDistillation(); calcAcid(); updatePairing();
+    calcBrix(); 
+    updateDistillation(); 
+    calcAcid(); 
+    updatePairing();
 </script>
 </body>
 </html>
