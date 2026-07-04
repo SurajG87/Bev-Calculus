@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bev Cal · Brix & Distillation</title>
+    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" href="logo.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>🧪 Bev Cal | Brix · Distillation · Acid · Pairing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+        :root {
+            --primary: #0F766E;           /* Deep teal */
+            --primary-dark: #0A5C57;
+            --bg: #F8FAFC;               /* Soft off-white / light grey */
+            --card-bg: #FFFFFF;
+            --text: #1E2937;
+            --text-light: #64748B;
+            --border: #E2E8F0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,11 +31,12 @@
         }
 
         body {
-            background: #f4efe7;
+            background: var(--bg);
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 16px;
-            color: #2c2418;
-            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px 16px 80px;
+            min-height: 100dvh;
         }
 
         .app-wrapper {
@@ -31,40 +45,42 @@
             width: 100%;
         }
 
+        /* Header */
         .tool-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
         }
         .tool-header h1 {
             font-size: 2.1rem;
             font-weight: 800;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #c47b3e, #9b4b2c);
-            -webkit-background-clip: text;
+            letter-spacing: -0.8px;
+            background: linear-gradient(135deg, var(--primary), #0A5C57);
             background-clip: text;
+            -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
         }
         .tool-header p {
-            color: #6b4e2e;
-            font-size: 0.85rem;
-            margin-top: 4px;
-            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 8px;
         }
 
+        /* Tabs */
         .tabs-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin-bottom: 24px;
-            scrollbar-width: thin;
+            margin-bottom: 28px;
+            scrollbar-width: none;
+        }
+        .tabs-wrapper::-webkit-scrollbar {
+            display: none;
         }
         .tabs {
             display: flex;
             gap: 8px;
-            background: #e7dfd3;
+            background: #E2E8F0;
             padding: 6px;
-            border-radius: 60px;
-            min-width: min-content;
+            border-radius: 9999px;
             width: fit-content;
             margin: 0 auto;
         }
@@ -72,251 +88,226 @@
             white-space: nowrap;
             background: transparent;
             border: none;
-            padding: 10px 20px;
-            font-size: 0.85rem;
+            padding: 12px 28px;
+            font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 40px;
-            color: #5a3e28;
+            border-radius: 9999px;
+            color: var(--text-light);
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .tab-btn.active {
             background: white;
-            color: #b35f2a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.12);
         }
 
+        /* Panes */
         .pane {
             display: none;
-            animation: fade 0.2s ease;
+            animation: fadeIn 0.3s ease forwards;
         }
         .pane.active-pane {
             display: block;
         }
-        @keyframes fade {
-            from { opacity: 0; transform: translateY(6px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Cards */
         .card {
-            background: #fffef7;
-            border-radius: 40px;
-            padding: 24px 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #ede3d6;
-            width: 100%;
+            background: var(--card-bg);
+            border-radius: 28px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border);
         }
         .card-title {
             font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 22px;
+            font-size: 1.35rem;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: #4a3420;
-            border-left: 5px solid #e7b874;
-            padding-left: 16px;
-            font-family: 'Inter', sans-serif;
+            gap: 12px;
+            color: var(--text);
         }
 
+        /* Inputs */
         .input-group {
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
         label {
             font-weight: 500;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
-            color: #7a5a3e;
+            letter-spacing: 0.6px;
+            color: var(--text-light);
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         input, select {
             width: 100%;
-            padding: 12px 16px;
-            font-size: 0.9rem;
-            background: white;
-            border: 1.5px solid #e4d5c4;
-            border-radius: 40px;
-            font-family: 'Inter', monospace;
-            color: #2c2418;
-            transition: 0.2s;
-            -webkit-appearance: none;
+            padding: 14px 18px;
+            font-size: 1rem;
+            background: #FFFFFF;
+            border: 2px solid var(--border);
+            border-radius: 9999px;
+            color: var(--text);
+            transition: all 0.2s ease;
         }
         input:focus, select:focus {
             outline: none;
-            border-color: #e2a25c;
-            box-shadow: 0 0 0 3px rgba(226,162,92,0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.15);
         }
 
+        /* Grids */
         .grid-2col, .grid-3col {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
-            margin-bottom: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
         }
         .grid-2col {
             grid-template-columns: repeat(2, 1fr);
         }
-        .grid-3col {
-            grid-template-columns: repeat(3, 1fr);
-        }
 
+        /* Buttons */
         button {
-            background: #d99142;
+            background: var(--primary);
             border: none;
             width: 100%;
-            padding: 14px;
-            font-size: 1rem;
+            padding: 16px;
+            font-size: 1.05rem;
             font-weight: 600;
             color: white;
-            border-radius: 60px;
-            margin-top: 16px;
+            border-radius: 9999px;
+            margin-top: 12px;
             cursor: pointer;
-            transition: 0.15s;
-            font-family: 'Inter', sans-serif;
-        }
-        button:hover {
-            background: #c47a34;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
         }
         button:active {
             transform: scale(0.97);
-            background: #bb7536;
+            box-shadow: 0 2px 6px rgba(15, 118, 110, 0.3);
         }
 
+        /* Results */
         .result-area {
-            background: #2c2418;
-            border-radius: 32px;
-            padding: 18px 20px;
-            color: #ffefdf;
-            margin-top: 18px;
+            background: #F1F5F9;
+            border-radius: 24px;
+            padding: 24px;
+            margin-top: 24px;
         }
         .result-item {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,225,195,0.15);
-            flex-wrap: wrap;
-            gap: 6px;
-            font-size: 0.9rem;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #E2E8F0;
+            gap: 12px;
+        }
+        .result-item:last-child {
+            border-bottom: none;
         }
         .result-value {
             font-weight: 700;
             font-family: 'Inter', monospace;
-            background: #3f3324;
-            padding: 4px 12px;
-            border-radius: 60px;
-            font-size: 0.85rem;
+            background: white;
+            padding: 6px 16px;
+            border-radius: 9999px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            min-width: 110px;
             text-align: right;
-            min-width: 70px;
         }
+
         .badge {
-            background: #f0e2d0;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            color: #7a562e;
-            display: inline-block;
-        }
-        .warning-note {
-            background: #5e3a1f33;
-            padding: 10px;
-            border-radius: 24px;
-            font-size: 0.75rem;
-            margin-top: 14px;
+            background: #E0F2F1;
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
             text-align: center;
         }
 
-        .footer {
-            font-size: 0.7rem;
+        .warning-note {
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 14px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 16px;
             text-align: center;
-            color: #af967c;
-            margin-top: 28px;
-            border-top: 1px solid #e9dfd1;
-            padding-top: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
         }
         .footer a {
-            color: #b35f2a;
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
         }
 
+        /* Distillation subtabs */
         .distillation-subtabs {
             display: flex;
             gap: 10px;
-            margin-bottom: 22px;
+            margin-bottom: 28px;
             flex-wrap: wrap;
         }
         .distillation-subtabs button {
-            width: auto;
-            margin-top: 0;
-            padding: 8px 20px;
-            background: #e7dfd3;
-            color: #5a3e28;
-            font-size: 0.85rem;
+            flex: 1;
+            padding: 12px 20px;
+            background: #E2E8F0;
+            color: var(--text-light);
+            border: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
         }
         .distillation-subtabs button.active-sub {
-            background: #d99142;
+            background: var(--primary);
             color: white;
         }
 
-        @media (max-width: 768px) {
+        /* Responsive */
+        @media (max-width: 640px) {
             body {
-                padding: 12px;
+                padding: 16px 12px 70px;
             }
             .card {
-                padding: 18px 14px;
-                border-radius: 32px;
+                padding: 22px 18px;
+                border-radius: 24px;
             }
             .card-title {
-                font-size: 1.1rem;
-                padding-left: 12px;
-                margin-bottom: 16px;
+                font-size: 1.25rem;
             }
-            .grid-2col, .grid-3col {
+            .grid-2col {
                 grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .result-item {
-                font-size: 0.8rem;
-                padding: 8px 0;
-            }
-            .result-value {
-                font-size: 0.75rem;
-                padding: 2px 10px;
-                min-width: 60px;
+                gap: 16px;
             }
             .tab-btn {
-                padding: 6px 14px;
-                font-size: 0.75rem;
-            }
-            .tool-header h1 {
-                font-size: 1.7rem;
-            }
-            .distillation-subtabs button {
-                padding: 6px 14px;
-                font-size: 0.75rem;
-            }
-            input, select {
-                padding: 10px 14px;
-                font-size: 0.85rem;
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
             button {
-                padding: 12px;
-                font-size: 0.95rem;
+                padding: 15px;
             }
         }
-        @media (min-width: 769px) and (max-width: 1024px) {
+
+        @media (min-width: 641px) and (max-width: 1024px) {
             .grid-3col {
                 grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 1025px) {
-            .grid-3col {
-                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -340,12 +331,12 @@
     <!-- BRIX PANE -->
     <div id="brixPane" class="pane active-pane">
         <div class="card">
-            <div class="card-title">📊 Brix Cal · sugar &amp; gum adjustment</div>
+            <div class="card-title">📊 Brix Cal · sugar & gum adjustment</div>
             <div class="grid-2col">
-                <div><label>Juice volume (ml)</label><input type="number" id="brixVolume" value="500" step="50"></div>
-                <div><label>Starting Brix (°Bx)</label><input type="number" id="startBrix" value="12" step="0.5"></div>
-                <div><label>Target Brix (°Bx)</label><input type="number" id="targetBrix" value="22" step="0.5"></div>
-                <div><label>Final weight (g) [optional]</label><input type="number" id="finalWeight" placeholder="for gum & acids"></div>
+                <div class="input-group"><label>Juice volume (ml)</label><input type="number" id="brixVolume" value="500" step="50"></div>
+                <div class="input-group"><label>Starting Brix (°Bx)</label><input type="number" id="startBrix" value="12" step="0.5"></div>
+                <div class="input-group"><label>Target Brix (°Bx)</label><input type="number" id="targetBrix" value="22" step="0.5"></div>
+                <div class="input-group"><label>Final weight (g) [optional]</label><input type="number" id="finalWeight" placeholder="for gum & acids"></div>
             </div>
             <div class="result-area" id="brixResults">
                 <div class="result-item"><span>🍬 Sugar already in juice</span><span id="sugarInJuice" class="result-value">— g</span></div>
@@ -364,7 +355,8 @@
     <!-- DISTILLATION PANE -->
     <div id="distillationPane" class="pane">
         <div class="card">
-            <div class="card-title">⚗️ Spirit Calculators · Dilution &amp; Sweetening &amp; Proofing</div>
+            <div class="card-title">⚗️ Spirit Calculators · Dilution & Sweetening & Proofing</div>
+            
             <div class="distillation-subtabs" id="distillationSubtabs">
                 <button data-distill="dilution" class="active-sub">💧 Dilution</button>
                 <button data-distill="sweetening">🍯 Sweetening</button>
@@ -373,8 +365,8 @@
             
             <div id="dilutionSection">
                 <div class="grid-2col">
-                    <div><label>Distillate strength (%)</label><input type="number" id="distillateStrength" value="70"></div>
-                    <div><label>Volume (ml)</label><input type="number" id="distillateVol" value="1000"></div>
+                    <div class="input-group"><label>Distillate strength (%)</label><input type="number" id="distillateStrength" value="70"></div>
+                    <div class="input-group"><label>Volume (ml)</label><input type="number" id="distillateVol" value="1000"></div>
                 </div>
                 <div class="input-group"><label>Desired strength (%)</label><input type="number" id="desiredStrength" value="40"></div>
                 <div class="result-area">
@@ -387,12 +379,18 @@
             
             <div id="sweeteningSection" style="display:none;">
                 <div class="grid-2col">
-                    <div><label>Spirit volume (ml)</label><input type="number" id="sweetVol" value="1000"></div>
-                    <div><label>Alcohol percentage (%)</label><input type="number" id="sweetABV" value="40"></div>
+                    <div class="input-group"><label>Spirit volume (ml)</label><input type="number" id="sweetVol" value="1000"></div>
+                    <div class="input-group"><label>Alcohol percentage (%)</label><input type="number" id="sweetABV" value="40"></div>
                 </div>
                 <div class="grid-2col">
-                    <div><label>Sugar percentage of final volume</label><input type="number" id="targetSugarPercent" value="8" step="1"></div>
-                    <div><label>Syrup ratio (sugar:water)</label><select id="syrupRatio"><option value="2">2:1 Rich (67%)</option><option value="1">1:1 Simple (50%)</option><option value="3">3:1 Very rich (75%)</option></select></div>
+                    <div class="input-group"><label>Sugar percentage of final volume</label><input type="number" id="targetSugarPercent" value="8" step="1"></div>
+                    <div class="input-group"><label>Syrup ratio (sugar:water)</label>
+                        <select id="syrupRatio">
+                            <option value="2">2:1 Rich (67%)</option>
+                            <option value="1">1:1 Simple (50%)</option>
+                            <option value="3">3:1 Very rich (75%)</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="result-area">
                     <div class="result-item"><span>🍬 Sugar Needed</span><span id="sugarNeeded" class="result-value">0 g</span></div>
@@ -406,12 +404,12 @@
             
             <div id="proofingSection" style="display:none;">
                 <div class="grid-2col">
-                    <div><label>Base liquid volume (ml)</label><input type="number" id="baseVol" value="800"></div>
-                    <div><label>Base ABV (%)</label><input type="number" id="baseABV" value="30"></div>
+                    <div class="input-group"><label>Base liquid volume (ml)</label><input type="number" id="baseVol" value="800"></div>
+                    <div class="input-group"><label>Base ABV (%)</label><input type="number" id="baseABV" value="30"></div>
                 </div>
                 <div class="grid-2col">
-                    <div><label>Desired target ABV (%)</label><input type="number" id="targetProofABV" value="45"></div>
-                    <div><label>High-proof spirit ABV (%)</label><input type="number" id="highProofABV" value="75"></div>
+                    <div class="input-group"><label>Desired target ABV (%)</label><input type="number" id="targetProofABV" value="45"></div>
+                    <div class="input-group"><label>High-proof spirit ABV (%)</label><input type="number" id="highProofABV" value="75"></div>
                 </div>
                 <div class="result-area">
                     <div class="result-item"><span>➕ Add spirit</span><span id="addSpirit" class="result-value">0 ml</span></div>
@@ -428,10 +426,10 @@
             <div class="card-title">⚖️ Acid Adjustment · match any fruit's acidity</div>
             <div class="input-group"><label>🥤 Juice mass (grams)</label><input type="number" id="acidMass" value="100" step="10"></div>
             <div class="grid-2col">
-                <div><label>🍊 Starting Juice Type</label><select id="sourceFruit"></select></div>
-                <div><label>🎯 Target Acidity</label><select id="targetFruit"></select></div>
+                <div class="input-group"><label>🍊 Starting Juice Type</label><select id="sourceFruit"></select></div>
+                <div class="input-group"><label>🎯 Target Acidity</label><select id="targetFruit"></select></div>
             </div>
-            <div id="acidPreview" class="badge" style="margin:12px 0 0; background:#f3ede4; width:100%; text-align:center;">—</div>
+            <div id="acidPreview" class="badge" style="margin: 16px 0;">—</div>
             <div class="result-area">
                 <div class="result-item"><span>🍋 Add Grams Citric Acid</span><span id="citricResult" class="result-value">— g</span></div>
                 <div class="result-item"><span>🍏 Add Grams Malic Acid</span><span id="malicResult" class="result-value">— g</span></div>
@@ -441,27 +439,28 @@
         </div>
     </div>
 
-    <!-- PAIRING PANE -->
+    <!-- FLAVOR PAIRING PANE -->
     <div id="pairingPane" class="pane">
         <div class="card">
             <div class="card-title">🌸 Flavor Pairing Explorer</div>
             <div class="input-group"><label>🔍 Search an ingredient...</label><input type="text" id="pairingSearch" placeholder="Type ingredient name..." autocomplete="off"></div>
             <div class="input-group"><label>📋 Select an ingredient</label><select id="pairingIngredient"></select></div>
-            <div id="pairingOutput" class="result-area" style="background:#3a2e22;">
+            <div id="pairingOutput" class="result-area">
                 <div class="result-item"><span>🥃 Compatible spirits</span><span id="spiritPair" class="result-value">—</span></div>
                 <div class="result-item"><span>🍯 Modifiers</span><span id="modifierPair" class="result-value">—</span></div>
-                <div class="result-item"><span>🌿 Herbs &amp; spices</span><span id="herbPair" class="result-value">—</span></div>
+                <div class="result-item"><span>🌿 Herbs & spices</span><span id="herbPair" class="result-value">—</span></div>
                 <div class="result-item"><span>🍸 Cocktail idea</span><span id="cocktailIdea" class="result-value">—</span></div>
             </div>
         </div>
     </div>
-
+    
     <div class="footer">
-        <a href="https://www.instagram.com/suraj.gurung87/?hl=en" target="_blank" rel="noopener noreferrer">@suraj.gurung87</a> · Always taste &amp; adjust
+        <a href="https://www.instagram.com/suraj.gurung87/?hl=en" target="_blank" rel="noopener noreferrer">@suraj.gurung87</a> · Always taste & adjust
     </div>
 </div>
 
 <script>
+    // ========== ACID DATABASE ==========
     const fruitAcidDB = {
         "Lemon": { citric: 5.50, malic: 0.10, total: 5.60 },
         "Lime": { citric: 3.75, malic: 1.75, total: 5.50 },
@@ -488,6 +487,7 @@
     };
     const fruitList = Object.keys(fruitAcidDB).sort();
 
+    // ========== FLAVOR PAIRING DATABASE ==========
     const pairingDB = {
         "Pineapple": { spirits: "Rum, Tequila, Mezcal, Cachaça", modifiers: "Coconut Syrup, Falernum, Campari, Lime Juice", herbs: "Mint, Thai Basil, Lime, Ginger, Cilantro", cocktail: "Jungle Bird, Painkiller, Pineapple Margarita" },
         "Lime": { spirits: "Blanco Tequila, White Rum, Gin, Cachaça", modifiers: "Triple Sec, Agave Syrup, Simple Syrup", herbs: "Mint, Cilantro, Thai Basil, Lemongrass", cocktail: "Daiquiri, Margarita, Gimlet" },
@@ -507,8 +507,12 @@
     const pairingKeys = Object.keys(pairingDB).sort();
 
     function populateSelects() {
-        const src = document.getElementById('sourceFruit'), tgt = document.getElementById('targetFruit');
-        fruitList.forEach(f => { src.add(new Option(f,f)); tgt.add(new Option(f,f)); });
+        const src = document.getElementById('sourceFruit');
+        const tgt = document.getElementById('targetFruit');
+        fruitList.forEach(f => {
+            src.add(new Option(f,f));
+            tgt.add(new Option(f,f));
+        });
         src.value = "Orange";
         tgt.value = "Lemon";
         
@@ -517,6 +521,7 @@
         pairSel.value = "Pineapple";
     }
 
+    // ACID CALCULATION
     function calcAcid() {
         let mass = parseFloat(document.getElementById('acidMass').value) || 0;
         const source = fruitAcidDB[document.getElementById('sourceFruit').value];
@@ -538,7 +543,8 @@
         citricToAdd = Math.round(citricToAdd * 100) / 100;
         malicToAdd = Math.round(malicToAdd * 100) / 100;
         
-        document.getElementById('acidPreview').innerHTML = `📊 ${source.total.toFixed(2)}% total acidity → ${target.total.toFixed(2)}% total acidity | Citric: ${source.citric}% → ${target.citric}% | Malic: ${source.malic}% → ${target.malic}%`;
+        document.getElementById('acidPreview').innerHTML = 
+            `📊 ${source.total.toFixed(2)}% → ${target.total.toFixed(2)}% | Citric: ${source.citric}% → ${target.citric}% | Malic: ${source.malic}% → ${target.malic}%`;
         
         if (citricToAdd < 0 && malicToAdd < 0) {
             document.getElementById('citricResult').innerHTML = '0.00 g (already higher)';
@@ -551,6 +557,7 @@
         }
     }
 
+    // PAIRING functions
     function updatePairing() {
         const ing = document.getElementById('pairingIngredient').value;
         const data = pairingDB[ing];
@@ -559,11 +566,6 @@
             document.getElementById('modifierPair').innerHTML = data.modifiers;
             document.getElementById('herbPair').innerHTML = data.herbs;
             document.getElementById('cocktailIdea').innerHTML = data.cocktail;
-        } else {
-            document.getElementById('spiritPair').innerHTML = '—';
-            document.getElementById('modifierPair').innerHTML = '—';
-            document.getElementById('herbPair').innerHTML = '—';
-            document.getElementById('cocktailIdea').innerHTML = '—';
         }
     }
     
@@ -583,20 +585,24 @@
         }
     }
 
+    // BRIX calculation
     function calcBrix() {
         let vol = parseFloat(document.getElementById('brixVolume').value) || 0;
         let start = parseFloat(document.getElementById('startBrix').value) || 0;
         let target = parseFloat(document.getElementById('targetBrix').value) || 0;
         let finalW = parseFloat(document.getElementById('finalWeight').value);
+        
         let sugarStart = vol * (start / 100);
         let waterStart = vol - sugarStart;
         let sugarTarget = vol * (target / 100);
         let addSugar = sugarTarget - sugarStart;
+        
         document.getElementById('sugarInJuice').innerHTML = sugarStart.toFixed(1) + ' g';
         document.getElementById('waterContent').innerHTML = waterStart.toFixed(1) + ' g';
         document.getElementById('sugarToAdd').innerHTML = addSugar.toFixed(1) + ' g';
         document.getElementById('simpleSyrup').innerHTML = (addSugar * 2).toFixed(1) + ' g';
         document.getElementById('richSyrup').innerHTML = (addSugar * 1.5).toFixed(1) + ' g';
+        
         if (finalW > 0) {
             document.getElementById('gumAmount').innerHTML = (finalW * 0.1 / 2).toFixed(1) + ' g';
             document.getElementById('citricAcidGum').innerHTML = (finalW * 0.003).toFixed(1) + ' g';
@@ -608,21 +614,25 @@
         }
     }
 
+    // DISTILLATION calculations
     function calcDilution() {
         let str = parseFloat(document.getElementById('distillateStrength').value) || 0;
         let vol = parseFloat(document.getElementById('distillateVol').value) || 0;
         let des = parseFloat(document.getElementById('desiredStrength').value) || 0;
-        if (str <= des || des <= 0) { 
-            document.getElementById('waterToAdd').innerHTML = '0 ml'; 
-            document.getElementById('finalDilutionVol').innerHTML = vol+' ml'; 
-            document.getElementById('abvReduction').innerHTML = '0%'; 
-            document.getElementById('dilutionRatio').innerHTML = '0:0'; 
-            return; 
+        
+        if (str <= des || des <= 0) {
+            document.getElementById('waterToAdd').innerHTML = '0 ml';
+            document.getElementById('finalDilutionVol').innerHTML = vol+' ml';
+            document.getElementById('abvReduction').innerHTML = '0%';
+            document.getElementById('dilutionRatio').innerHTML = '0:0';
+            return;
         }
+        
         let water = vol * (str/des - 1);
         let finalVol = vol + water;
         let reduction = ((str - des)/str)*100;
         let ratio = (water/vol).toFixed(1);
+        
         document.getElementById('waterToAdd').innerHTML = water.toFixed(1) + ' ml';
         document.getElementById('finalDilutionVol').innerHTML = finalVol.toFixed(1) + ' ml';
         document.getElementById('abvReduction').innerHTML = reduction.toFixed(1) + '%';
@@ -634,11 +644,13 @@
         let abv = parseFloat(document.getElementById('sweetABV').value) || 0;
         let sugarPerc = parseFloat(document.getElementById('targetSugarPercent').value) || 0;
         let ratio = parseFloat(document.getElementById('syrupRatio').value);
+        
         let sugarNeeded = vol * (sugarPerc / 100);
         let waterNeeded = sugarNeeded / ratio;
         let syrupVol = sugarNeeded + waterNeeded;
         let finalVol = vol + syrupVol;
         let finalAbv = (abv * vol) / finalVol;
+        
         document.getElementById('sugarNeeded').innerHTML = sugarNeeded.toFixed(1) + ' g';
         document.getElementById('waterForSyrup').innerHTML = waterNeeded.toFixed(1) + ' ml';
         document.getElementById('syrupVolume').innerHTML = syrupVol.toFixed(1) + ' ml';
@@ -651,17 +663,23 @@
         let baseA = parseFloat(document.getElementById('baseABV').value) || 0;
         let targetA = parseFloat(document.getElementById('targetProofABV').value) || 0;
         let highA = parseFloat(document.getElementById('highProofABV').value) || 0;
-        if (targetA <= baseA || highA <= targetA) { 
-            document.getElementById('addSpirit').innerHTML = '0 ml'; 
-            document.getElementById('finalBlendVol').innerHTML = baseV+' ml'; 
-            return; 
+        
+        if (targetA <= baseA || highA <= targetA) {
+            document.getElementById('addSpirit').innerHTML = '0 ml';
+            document.getElementById('finalBlendVol').innerHTML = baseV+' ml';
+            return;
         }
+        
         let add = baseV * (targetA - baseA) / (highA - targetA);
         document.getElementById('addSpirit').innerHTML = add.toFixed(1) + ' ml';
         document.getElementById('finalBlendVol').innerHTML = (baseV + add).toFixed(1) + ' ml';
     }
 
-    function updateDistillation() { calcDilution(); calcSweetening(); calcProofing(); }
+    function updateDistillation() {
+        calcDilution();
+        calcSweetening();
+        calcProofing();
+    }
 
     function initDistillationSubtabs() {
         const btns = document.querySelectorAll('[data-distill]');
@@ -670,15 +688,17 @@
             sweetening: document.getElementById('sweeteningSection'),
             proofing: document.getElementById('proofingSection')
         };
+        
         btns.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', () => {
                 btns.forEach(b => b.classList.remove('active-sub'));
-                this.classList.add('active-sub');
+                btn.classList.add('active-sub');
                 Object.values(sections).forEach(s => s.style.display = 'none');
-                sections[this.dataset.distill].style.display = 'block';
-                if (this.dataset.distill === 'dilution') calcDilution();
-                if (this.dataset.distill === 'sweetening') calcSweetening();
-                if (this.dataset.distill === 'proofing') calcProofing();
+                sections[btn.dataset.distill].style.display = 'block';
+                
+                if (btn.dataset.distill === 'dilution') calcDilution();
+                if (btn.dataset.distill === 'sweetening') calcSweetening();
+                if (btn.dataset.distill === 'proofing') calcProofing();
             });
         });
     }
@@ -686,8 +706,10 @@
     function switchTab(tabId) {
         document.querySelectorAll('.pane').forEach(p => p.classList.remove('active-pane'));
         document.getElementById(tabId + 'Pane').classList.add('active-pane');
+        
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+        
         if (tabId === 'brix') calcBrix();
         if (tabId === 'distillation') updateDistillation();
         if (tabId === 'acid') calcAcid();
@@ -695,34 +717,43 @@
     }
 
     function bindEvents() {
+        // Acid
         document.getElementById('calcAcidBtn').addEventListener('click', calcAcid);
         document.getElementById('sourceFruit').addEventListener('change', calcAcid);
         document.getElementById('targetFruit').addEventListener('change', calcAcid);
         document.getElementById('acidMass').addEventListener('input', calcAcid);
         
+        // Brix
         document.getElementById('calcBrixBtn').addEventListener('click', calcBrix);
-        ['brixVolume','startBrix','targetBrix','finalWeight'].forEach(id => document.getElementById(id).addEventListener('input', calcBrix));
-        
-        document.getElementById('calcDistillationBtn').addEventListener('click', updateDistillation);
-        ['distillateStrength','distillateVol','desiredStrength','sweetVol','sweetABV','targetSugarPercent','syrupRatio','baseVol','baseABV','targetProofABV','highProofABV'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.addEventListener('input', updateDistillation);
+        ['brixVolume','startBrix','targetBrix','finalWeight'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calcBrix);
         });
         
+        // Distillation
+        document.getElementById('calcDistillationBtn').addEventListener('click', updateDistillation);
+        ['distillateStrength','distillateVol','desiredStrength','sweetVol','sweetABV','targetSugarPercent','syrupRatio','baseVol','baseABV','targetProofABV','highProofABV']
+            .forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('input', updateDistillation);
+            });
+        
+        // Pairing
         document.getElementById('pairingIngredient').addEventListener('change', updatePairing);
         document.getElementById('pairingSearch').addEventListener('input', filterPairing);
         
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', function() {
-            switchTab(this.getAttribute('data-tab'));
-        }));
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
+        });
     }
 
+    // Initialize
     populateSelects();
     bindEvents();
     initDistillationSubtabs();
-    calcBrix(); 
-    updateDistillation(); 
-    calcAcid(); 
+    calcBrix();
+    updateDistillation();
+    calcAcid();
     updatePairing();
 </script>
 </body>
