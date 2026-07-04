@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-       <!-- Apple Touch Icon (the main one for home screen) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Bev Cal · Brix & Distillation</title>
+    <!-- Apple Touch Icon (placeholder) -->
     <link rel="apple-touch-icon" href="logo.png">
-    <!-- Optional: Prevents zooming when launching from home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Spirit Dilution & Sweetening Calculator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>🧪 Bev Cal | Brix · Distillation · Acid · Pairing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -27,12 +21,10 @@
         body {
             background: #f4efe7;
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            padding: 20px 24px 60px;
+            padding: 16px 16px 40px;
             color: #2c2418;
+            min-height: 100vh;
         }
-
-        /* Import Google Font for a fresh look */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap');
 
         .app-wrapper {
             max-width: 1280px;
@@ -40,12 +32,13 @@
             width: 100%;
         }
 
+        /* --- HEADER --- */
         .tool-header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
         .tool-header h1 {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 800;
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #c47b3e, #9b4b2c);
@@ -56,20 +49,21 @@
         }
         .tool-header p {
             color: #6b4e2e;
-            font-size: 0.9rem;
-            margin-top: 6px;
+            font-size: 0.85rem;
+            margin-top: 4px;
             font-weight: 400;
         }
 
+        /* --- TABS --- */
         .tabs-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             scrollbar-width: thin;
         }
         .tabs {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             background: #e7dfd3;
             padding: 6px;
             border-radius: 60px;
@@ -81,8 +75,8 @@
             white-space: nowrap;
             background: transparent;
             border: none;
-            padding: 10px 24px;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            font-size: 0.85rem;
             font-weight: 600;
             border-radius: 40px;
             color: #5a3e28;
@@ -96,6 +90,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
+        /* --- PANES --- */
         .pane {
             display: none;
             animation: fade 0.2s ease;
@@ -104,47 +99,50 @@
             display: block;
         }
         @keyframes fade {
-            from { opacity: 0; transform: translateY(5px);}
-            to { opacity: 1; transform: translateY(0);}
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- CARDS --- */
         .card {
             background: #fffef7;
             border-radius: 40px;
-            padding: 28px 32px;
+            padding: 24px 20px;
             margin-bottom: 24px;
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #ede3d6;
             width: 100%;
         }
         .card-title {
             font-weight: 700;
-            font-size: 1.35rem;
-            margin-bottom: 24px;
+            font-size: 1.3rem;
+            margin-bottom: 22px;
             display: flex;
             align-items: center;
             gap: 10px;
             color: #4a3420;
             border-left: 5px solid #e7b874;
-            padding-left: 18px;
+            padding-left: 16px;
             font-family: 'Inter', sans-serif;
         }
+
+        /* --- FORM ELEMENTS --- */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         label {
             font-weight: 500;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
             color: #7a5a3e;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
         input, select {
             width: 100%;
             padding: 12px 16px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: white;
             border: 1.5px solid #e4d5c4;
             border-radius: 40px;
@@ -158,11 +156,12 @@
             border-color: #e2a25c;
             box-shadow: 0 0 0 3px rgba(226,162,92,0.2);
         }
+
         .grid-2col, .grid-3col {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px;
         }
         .grid-2col {
             grid-template-columns: repeat(2, 1fr);
@@ -170,6 +169,7 @@
         .grid-3col {
             grid-template-columns: repeat(3, 1fr);
         }
+
         button {
             background: #d99142;
             border: none;
@@ -185,25 +185,27 @@
             font-family: 'Inter', sans-serif;
         }
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.97);
             background: #bb7536;
         }
+
+        /* --- RESULT AREA (dark warm) --- */
         .result-area {
             background: #2c2418;
             border-radius: 32px;
-            padding: 20px 24px;
+            padding: 18px 20px;
             color: #ffefdf;
-            margin-top: 20px;
+            margin-top: 18px;
         }
         .result-item {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255,225,195,0.2);
+            border-bottom: 1px solid rgba(255,225,195,0.15);
             flex-wrap: wrap;
-            gap: 8px;
-            font-size: 0.95rem;
+            gap: 6px;
+            font-size: 0.9rem;
         }
         .result-value {
             font-weight: 700;
@@ -211,8 +213,9 @@
             background: #3f3324;
             padding: 4px 12px;
             border-radius: 60px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: right;
+            min-width: 70px;
         }
         .badge {
             background: #f0e2d0;
@@ -230,50 +233,87 @@
             margin-top: 14px;
             text-align: center;
         }
+
         .footer {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-align: center;
             color: #af967c;
-            margin-top: 32px;
+            margin-top: 28px;
             border-top: 1px solid #e9dfd1;
-            padding-top: 24px;
+            padding-top: 20px;
         }
         .footer a {
             color: #b35f2a;
             text-decoration: none;
             font-weight: 500;
         }
-        .footer a:hover {
-            text-decoration: underline;
-        }
         hr { margin: 16px 0; border-color: #ede3d6; }
 
-        /* Responsive adjustments */
+        /* --- DISTILLATION SUBTABS --- */
+        .distillation-subtabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+        .distillation-subtabs button {
+            width: auto;
+            margin-top: 0;
+            padding: 8px 20px;
+            background: #e7dfd3;
+            color: #5a3e28;
+            font-size: 0.85rem;
+        }
+        .distillation-subtabs button.active-sub {
+            background: #d99142;
+            color: white;
+        }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             body {
-                padding: 16px;
+                padding: 12px 12px 32px;
             }
             .card {
-                padding: 20px 18px;
+                padding: 18px 14px;
+                border-radius: 32px;
             }
             .card-title {
-                font-size: 1.2rem;
-                margin-bottom: 18px;
+                font-size: 1.1rem;
+                padding-left: 12px;
+                margin-bottom: 16px;
             }
             .grid-2col, .grid-3col {
                 grid-template-columns: 1fr;
-                gap: 14px;
+                gap: 12px;
             }
             .result-item {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+                padding: 8px 0;
             }
             .result-value {
-                font-size: 0.8rem;
-                padding: 3px 10px;
+                font-size: 0.75rem;
+                padding: 2px 10px;
+                min-width: 60px;
             }
             .tab-btn {
-                padding: 8px 18px;
-                font-size: 0.8rem;
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+            .tool-header h1 {
+                font-size: 1.7rem;
+            }
+            .distillation-subtabs button {
+                padding: 6px 14px;
+                font-size: 0.75rem;
+            }
+            input, select {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+            button {
+                padding: 12px;
+                font-size: 0.95rem;
             }
         }
         @media (min-width: 769px) and (max-width: 1024px) {
@@ -286,24 +326,6 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-        /* Distillation sub-tabs */
-        .distillation-subtabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-        .distillation-subtabs button {
-            width: auto;
-            margin-top: 0;
-            padding: 8px 20px;
-            background: #e7dfd3;
-            color: #5a3e28;
-        }
-        .distillation-subtabs button.active-sub {
-            background: #d99142;
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -313,6 +335,7 @@
         <p>Brix · Distillation · Acid · Pairing — precision for beverage professionals</p>
     </div>
 
+    <!-- TABS -->
     <div class="tabs-wrapper">
         <div class="tabs">
             <button class="tab-btn active" data-tab="brix">📊 Brix Cal</button>
@@ -322,10 +345,10 @@
         </div>
     </div>
 
-    <!-- BRIX PANE -->
+    <!-- ===== BRIX PANE ===== -->
     <div id="brixPane" class="pane active-pane">
         <div class="card">
-            <div class="card-title">📊 Brix Cal · sugar & gum adjustment</div>
+            <div class="card-title">📊 Brix Cal · sugar &amp; gum adjustment</div>
             <div class="grid-2col">
                 <div><label>Juice volume (ml)</label><input type="number" id="brixVolume" value="500" step="50"></div>
                 <div><label>Starting Brix (°Bx)</label><input type="number" id="startBrix" value="12" step="0.5"></div>
@@ -346,10 +369,10 @@
         </div>
     </div>
 
-    <!-- DISTILLATION PANE -->
+    <!-- ===== DISTILLATION PANE ===== -->
     <div id="distillationPane" class="pane">
         <div class="card">
-            <div class="card-title">⚗️ Spirit Calculators · Dilution & Sweetening & Proofing</div>
+            <div class="card-title">⚗️ Spirit Calculators · Dilution &amp; Sweetening &amp; Proofing</div>
             <div class="distillation-subtabs" id="distillationSubtabs">
                 <button data-distill="dilution" class="active-sub">💧 Dilution</button>
                 <button data-distill="sweetening">🍯 Sweetening</button>
@@ -407,7 +430,7 @@
         </div>
     </div>
 
-    <!-- ACID PANE -->
+    <!-- ===== ACID PANE ===== -->
     <div id="acidPane" class="pane">
         <div class="card">
             <div class="card-title">⚖️ Acid Adjustment · match any fruit's acidity</div>
@@ -426,7 +449,7 @@
         </div>
     </div>
 
-    <!-- FLAVOR PAIRING PANE -->
+    <!-- ===== PAIRING PANE ===== -->
     <div id="pairingPane" class="pane">
         <div class="card">
             <div class="card-title">🌸 Flavor Pairing Explorer</div>
@@ -435,14 +458,14 @@
             <div id="pairingOutput" class="result-area" style="background:#3a2e22;">
                 <div class="result-item"><span>🥃 Compatible spirits</span><span id="spiritPair" class="result-value">—</span></div>
                 <div class="result-item"><span>🍯 Modifiers</span><span id="modifierPair" class="result-value">—</span></div>
-                <div class="result-item"><span>🌿 Herbs & spices</span><span id="herbPair" class="result-value">—</span></div>
+                <div class="result-item"><span>🌿 Herbs &amp; spices</span><span id="herbPair" class="result-value">—</span></div>
                 <div class="result-item"><span>🍸 Cocktail idea</span><span id="cocktailIdea" class="result-value">—</span></div>
             </div>
         </div>
     </div>
-    
+
     <div class="footer">
-        <a href="https://www.instagram.com/suraj.gurung87/?hl=en" target="_blank" rel="noopener noreferrer">@suraj.gurung87</a> · Always taste & adjust
+        <a href="https://www.instagram.com/suraj.gurung87/?hl=en" target="_blank" rel="noopener noreferrer">@suraj.gurung87</a> · Always taste &amp; adjust
     </div>
 </div>
 
@@ -474,7 +497,7 @@
     };
     const fruitList = Object.keys(fruitAcidDB).sort();
 
-    // ========== FLAVOR PAIRING DATABASE (Condensed but complete) ==========
+    // ========== FLAVOR PAIRING DATABASE ==========
     const pairingDB = {
         "Pineapple": { spirits: "Rum, Tequila, Mezcal, Cachaça", modifiers: "Coconut Syrup, Falernum, Campari, Lime Juice", herbs: "Mint, Thai Basil, Lime, Ginger, Cilantro", cocktail: "Jungle Bird, Painkiller, Pineapple Margarita" },
         "Lime": { spirits: "Blanco Tequila, White Rum, Gin, Cachaça", modifiers: "Triple Sec, Agave Syrup, Simple Syrup", herbs: "Mint, Cilantro, Thai Basil, Lemongrass", cocktail: "Daiquiri, Margarita, Gimlet" },
@@ -540,7 +563,7 @@
         }
     }
 
-    // PAIRING functions
+    // PAIRING
     function updatePairing() {
         const ing = document.getElementById('pairingIngredient').value;
         const data = pairingDB[ing];
@@ -573,7 +596,7 @@
         }
     }
 
-    // BRIX calculation
+    // BRIX
     function calcBrix() {
         let vol = parseFloat(document.getElementById('brixVolume').value) || 0;
         let start = parseFloat(document.getElementById('startBrix').value) || 0;
@@ -599,7 +622,7 @@
         }
     }
 
-    // DISTILLATION calculations
+    // DISTILLATION
     function calcDilution() {
         let str = parseFloat(document.getElementById('distillateStrength').value) || 0;
         let vol = parseFloat(document.getElementById('distillateVol').value) || 0;
@@ -707,6 +730,7 @@
         document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab'))));
     }
 
+    // Init
     populateSelects();
     bindEvents();
     initDistillationSubtabs();
